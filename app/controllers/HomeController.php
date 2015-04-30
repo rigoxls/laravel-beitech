@@ -24,11 +24,18 @@ class HomeController extends ServiceController {
         return View::make('edit-customer', compact('customer'));
     }
 
-    public function linkCustomerProduct()
+    public function linkCustomerProduct($customerId = null)
 	{
         $products = Product::orderBy('name','ASC')->get();
         $customers = Customer::orderBy('name','ASC')->get();
-		return View::make('link-customer-product', compact('customers'), compact('products'));
+
+        if($customerId){
+            $selectedProducts = DB::table('customer_products')->where('customer_id', '=', $customerId)->get();
+        }
+
+		return View::make('link-customer-product',
+            compact('customers', 'products','selectedProducts'))
+        ->with('customerId', $customerId, 'selectedProducts');
 	}
 
 

@@ -85,21 +85,29 @@ class ServiceController extends Controller {
 
     public function linkCustomerProductsPost()
     {
-        $product = new Product;
+        $products = Input::get('products');
 
-        var_dump(Input::get());
-        exit;
+        //remove all linked products
+        DB::table('customer_products')->where('customer_id', '=', Input::get('customerId'))->delete();
 
-        $product->name = Input::get('name');
-        $product->price = Input::get('price');
+        if(!$products){
+            $this->messages('Customer without products linked','danger');
+            return Redirect::to('/link-customer-product/'.Input::get('customerId'));
+        }
 
-/*        if ($product->save()) {
-            $this->messages('Product Saved!','success');
-        } else {
-            $this->messages();
-        }*/
+        foreach ($products as $k => $product) {
+            $cProducts = new CustomerProducts;
+            $cProducts->customer_id = Input::get('customerId');
+            $cProducts->product_id = $product;
 
-        return Redirect::to('/create-product');
+            if ($cProducts->save()) {
+                $this->messages('Customer Products Linked!','success');
+            } else {
+                $this->messages();
+            }
+        }
+
+        return Redirect::to('/link-customer-product/'.Input::get('customerId'));
     }
 
 }

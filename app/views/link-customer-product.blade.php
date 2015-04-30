@@ -11,17 +11,23 @@
                 </div>
 
                 <div class="panel-body">
-                    <form method="post" action="store">
+                    <form method="post" action="/store">
                         <p>
-                          <select class="selectpicker">
+                          <select name="customerId" class="selectpicker" onchange="window.location=this.options[this.selectedIndex].value">
                           @foreach($customers as $customer)
-                            <option value="{{$customer->customer_id}}">{{$customer->name}}</option>
+                            <option value="{{$customer->customer_id}}" @if(isset($customerId) && $customerId == $customer->customer_id) selected @endif>{{$customer->name}}</option>
                           @endforeach
                           </select>
                         </p>
                         <p>
                           @foreach($products as $product)
-                            <input type="checkbox" name="product[]" value="{{$product->product_id}}" />  {{$product->name}}&nbsp;
+                            <?php $checked = false; ?>
+                            @foreach($selectedProducts as $sp)
+                                @if($sp->product_id == $product->product_id)
+                                   <?php $checked = true; ?>
+                                @endif
+                            @endforeach
+                            <input type="checkbox" name="products[]" value="{{$product->product_id}}" @if($checked) checked @endif/>  {{$product->name}}&nbsp;
                           @endforeach
                         </p>
                         <p>

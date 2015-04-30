@@ -11,10 +11,25 @@
 |
 */
 
-Route::get('/', ['uses' => 'HomeController@index']);
-Route::get('/list-customers', ['uses' => 'HomeController@listCustomers']);
-Route::get('/edit-customer/{id}', ['uses' => 'HomeController@editCustomer']);
-Route::get('/link-customer-product', ['uses' => 'HomeController@linkCustomerProduct']);
-Route::get('/create-product', ['uses' => 'HomeController@createProduct']);
+Route::get('/',
+    ['uses' => 'HomeController@index']
+);
+
+Route::get('/list-customers',
+    ['uses' => 'HomeController@listCustomers']
+);
+
+Route::get('/edit-customer/{id}',
+    ['uses' => 'HomeController@editCustomer']
+);
+
+Route::get('/link-customer-product/{id?}',
+    ['uses' => 'HomeController@linkCustomerProduct']
+);
+
+Route::get('/create-product',
+    ['uses' => 'HomeController@createProduct']
+);
+
 Route::post('/store/','HomeController@store');
 
