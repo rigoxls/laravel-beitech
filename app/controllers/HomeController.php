@@ -29,13 +29,15 @@ class HomeController extends ServiceController {
         $products = Product::orderBy('name','ASC')->get();
         $customers = Customer::orderBy('name','ASC')->get();
 
+        $selectedProducts = array();
+
         if($customerId){
             $selectedProducts = DB::table('customer_products')->where('customer_id', '=', $customerId)->get();
         }
 
 		return View::make('link-customer-product',
             compact('customers', 'products','selectedProducts'))
-        ->with('customerId', $customerId, 'selectedProducts');
+        ->with('customerId', $customerId);
 	}
 
 
