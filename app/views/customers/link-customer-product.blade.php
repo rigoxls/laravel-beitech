@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     <form method="post" action="/store">
                         <p>
-                          <select name="customerId" class="selectpicker" onchange="window.location=this.options[this.selectedIndex].value">
+                          <select name="customerId" class="selectpicker" onchange="window.location=window.location.origin + '/link-customer-product/' + this.options[this.selectedIndex].value">
                           @foreach($customers as $customer)
                             <option value="{{$customer->customer_id}}" @if(isset($customerId) && $customerId == $customer->customer_id) selected @endif>{{$customer->name}}</option>
                           @endforeach

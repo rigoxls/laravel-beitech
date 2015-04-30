@@ -54,7 +54,7 @@
             <button class="btn btn-danger dropdown-toggle" type="button"  data-toggle="dropdown">Customers
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/">Create Customer</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/create-customer">Create Customer</a></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="/list-customers">List Customer</a></li>
                 <li role="presentation" class="divider"></li>
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="/link-customer-product">Link Customer - Products</a></li>

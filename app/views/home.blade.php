@@ -1,31 +1,18 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h4>New customer</h4>
+                    <h4>Read First</h4>
                 </div>
 
                 <div class="panel-body">
-                    <form method="post" action="store">
-                        <p>
-                            <input type="text" name="name" placeholder="Customer name" class="form-control" required>
-                        </p>
-                        <p>
-                            <input type="email" name="email" placeholder="Customer email" class="form-control" required>
-                        </p>
-                        <p>
-                            <input type="submit" value="Save Customer" class="btn btn-primary">
-                        </p>
-                        <input type="hidden" value="saveCustomer" name="action">
-                    </form>
-                    @if(Session::has('message'))
-                        <div class="alert alert-{{ Session::get('class') }}">{{ Session::get('message')}}</div>
-                    @endif
+                    This is a test project, it was created to implement a transaction interface only for testing purposes.
+                    You can navigate in menu above, create products and customers and do operations between them.
                 </div>
 
             </div>

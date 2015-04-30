@@ -15,25 +15,32 @@ Route::get('/',
     ['uses' => 'HomeController@index']
 );
 
+//Customers routes
+
+Route::get('/create-customer',
+    ['uses' => 'CustomersController@createCustomer']
+);
+
 Route::get('/list-customers',
-    ['uses' => 'HomeController@listCustomers']
+    ['uses' => 'CustomersController@listCustomers']
 );
 
 Route::get('/edit-customer/{id}',
-    ['uses' => 'HomeController@editCustomer']
+    ['uses' => 'CustomersController@editCustomer']
 );
 
 Route::get('/link-customer-product/{id?}',
-    ['uses' => 'HomeController@linkCustomerProduct']
+    ['uses' => 'CustomersController@linkCustomerProduct']
 );
 
+//products routes
 Route::get('/create-product',
-    ['uses' => 'HomeController@createProduct']
+    ['uses' => 'ProductsController@createProduct']
 );
 
 Route::get('/list-products',
-    ['uses' => 'HomeController@listProducts']
+    ['uses' => 'ProductsController@listProducts']
 );
 
-Route::post('/store/','HomeController@store');
+Route::post('/store/','ServiceController@store');
 
