@@ -1,0 +1,36 @@
+<?php
+
+class HomeController extends ServiceController {
+
+    public function index()
+    {
+        return View::make('home');
+    }
+
+    public function createProduct()
+    {
+        return View::make('create-product');
+    }
+
+    public function listCustomers()
+    {
+        $customers = Customer::orderBy('name','ASC')->get();
+        return View::make('list-customers', compact('customers'));
+    }
+
+    public function editCustomer($id)
+    {
+        $customer = DB::table('customer')->where('customer_id', '=', $id)->get();
+        return View::make('edit-customer', compact('customer'));
+    }
+
+    public function linkCustomerProduct()
+	{
+        $products = Product::orderBy('name','ASC')->get();
+        $customers = Customer::orderBy('name','ASC')->get();
+		return View::make('link-customer-product', compact('customers'), compact('products'));
+	}
+
+
+
+}
