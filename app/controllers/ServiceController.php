@@ -110,4 +110,20 @@ class ServiceController extends Controller {
         return Redirect::to('/link-customer-product/'.Input::get('customerId'));
     }
 
+    public function updateProductPost()
+    {
+        $product = Product::find(Input::get('id'));
+
+        $product->name = Input::get('name');
+        $product->price = Input::get('price');
+
+        if ($product->save()) {
+            $this->messages('Product Update !','success');
+        } else {
+            $this->messages();
+        }
+
+        return Redirect::to('/list-products');
+    }
+
 }

@@ -38,6 +38,10 @@ Route::get('/create-product',
     ['uses' => 'ProductsController@createProduct']
 );
 
+Route::get('/edit-product/{id}',
+    ['uses' => 'ProductsController@editProduct']
+);
+
 Route::get('/list-products',
     ['uses' => 'ProductsController@listProducts']
 );
