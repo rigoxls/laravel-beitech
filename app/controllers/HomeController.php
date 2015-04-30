@@ -18,6 +18,12 @@ class HomeController extends ServiceController {
         return View::make('list-customers', compact('customers'));
     }
 
+    public function listProducts()
+    {
+        $products = Product::orderBy('name','ASC')->get();
+        return View::make('list-products', compact('products'));
+    }
+
     public function editCustomer($id)
     {
         $customer = DB::table('customer')->where('customer_id', '=', $id)->get();

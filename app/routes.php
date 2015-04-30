@@ -31,5 +31,9 @@ Route::get('/create-product',
     ['uses' => 'HomeController@createProduct']
 );
 
+Route::get('/list-products',
+    ['uses' => 'HomeController@listProducts']
+);
+
 Route::post('/store/','HomeController@store');
 
