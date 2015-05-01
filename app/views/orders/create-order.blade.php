@@ -32,19 +32,25 @@
                         </div>
                         <div class="container-rows">
                             <div class="product-row">
-                                    <select name="productId" class="selectpicker select-product" usd="{{$usdCurrency['rate']}}">
+                                    <select class="selectpicker select-product" usd="{{$usdCurrency['rate']}}">
                                         <option value="-1">- Select Product -</option>
                                         @foreach($customerProducts as $product)
                                             <option value="{{$product->product_id}}" price="{{$product->price}}">{{$product->name}}</option>
                                         @endforeach
                                     </select>
-                                    <input type="number" name="price" class="form-control input-product" required readonly="">
-                                    <input type="number" name="quantity" class="form-control input-product input-price" required>
-                                    <input type="number" name="eur-price" class="form-control input-product" required step="any" readonly="">
-                                    <input type="number" name="usd-price" class="form-control input-product" required step="any" readonly="">
+                                    <input type="number" class="form-control input-product price" required readonly="">
+                                    <input type="number" class="form-control input-product input-price quantity" required>
+                                    <input type="number" class="form-control input-product eur-price" required step="any" readonly="">
+                                    <input type="number" class="form-control input-product usd-price" required step="any" readonly="">
 
                             </div>
                         </div>
+
+                        <div class="total-prices">
+                            <input type="number" class="form-control input-product total-eur" required step="any" readonly="">
+                            <input type="number" class="form-control input-product total-usd" required step="any" readonly="">
+                        </div>
+
                         <p class="pull-right action-buttons">
                             <input type="button" id="addRow" value="Add Product" class="btn btn-success">
                             <input type="button" value="Save Product" class="btn btn-primary">

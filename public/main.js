@@ -17,19 +17,40 @@
             $(".select-product").on('change',function(e){
                 var cPrice = $('option:selected', this).attr('price');
 
-                $(this).next("input[name=price]").val(cPrice);
-                $(this).nextAll("input[name=quantity]").val('');
-                $(this).nextAll("input[name=eur-price]").val('');
-                $(this).nextAll("input[name=usd-price]").val('');
+                //set unitary price
+                $(this).next("input.price").val(cPrice);
+
+                //clean all fields on change product
+                $(this).nextAll("input.quantity").val('');
+                $(this).nextAll("input.eur-price").val('');
+                $(this).nextAll("input.usd-price").val('');
             });
 
             $(".input-price").on('keyup', function(e){
-                var uPrice = parseFloat($(this).prev('input[name=price]').val());
+                var uPrice = parseFloat($(this).prev("input.price").val());
                 var eurPrice = parseFloat($(this).val()) * uPrice;
-                var usdPrice = parseFloat($(this).prevAll(".select-product").attr('usd')) * parseFloat($(this).val());
+                var usdPrice = parseFloat($(this).prevAll(".select-product").attr("usd")) * parseFloat($(this).val()) * uPrice;
 
-                $(this).next('input[name=eur-price]').val(eurPrice);
-                $(this).nextAll('input[name=usd-price]').val(usdPrice);
+                //round values to 2
+                $(this).next("input.eur-price").val(Math.round(eurPrice * 100) / 100);
+                $(this).nextAll("input.usd-price").val(Math.round(usdPrice * 100) / 100);
+
+                //update total prices
+                var totalEur = 0;
+                $("input.eur-price").each(function(){
+                    if($.isNumeric($(this).val())){
+                        totalEur += parseFloat($(this).val());
+                    }
+                });
+                $("input.total-eur").val(totalEur);
+
+                var totalUsd = 0;
+                $("input.usd-price").each(function(){
+                    if($.isNumeric($(this).val())){
+                        totalUsd += parseFloat($(this).val());
+                    }
+                });
+                $("input.total-usd").val(totalUsd);
             });
 
             $("#addRow").click(function(){
