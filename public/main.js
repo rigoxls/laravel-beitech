@@ -33,7 +33,8 @@
             });
 
             $("#addRow").click(function(){
-                $( "div.product-row" ).clone(true).appendTo( "div.container-rows" );
+                $( "div.product-row:first" ).clone(true).appendTo( "div.container-rows" );
+                $( "div.product-row:last" ).find('input').val('');
             })
         };
 
