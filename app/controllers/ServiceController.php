@@ -2,7 +2,37 @@
 
 class ServiceController extends Controller {
 
-    public function messages($message = null, $type = null){
+
+    public function parseXML()
+    {
+        $url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
+        $xml = simplexml_load_file($url);
+        $xmlCur = $xml->Cube->Cube->Cube;
+
+        foreach ($xmlCur as $k => $curr) {
+            $dbCurrency = DB::table('currencies')->where('name', '=', $curr->attributes()->currency)->get();
+
+            $dbCurrency = array_shift($dbCurrency);
+
+            //already on db
+            if($dbCurrency){
+                $currency = Currencies::find($dbCurrency->currency_id);
+                $currency->name = $curr->attributes()->currency;
+                $currency->rate = $curr->attributes()->rate;
+            }
+            //new currency
+            else{
+                $currency = new Currencies;
+                $currency->name = $curr->attributes()->currency;
+                $currency->rate = $curr->attributes()->rate;
+            }
+            $currency->save();
+        }
+    }
+
+
+    public function messages($message = null, $type = null)
+    {
         if($message){
             Session::flash('message',$message);
             Session::flash('class',$type);

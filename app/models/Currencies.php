@@ -1,7 +1,8 @@
 <?php
 
-class Customer extends \Eloquent {
-    protected $table = 'customer';
-	protected $fillable = array("name","email");
+class Currencies extends \Eloquent {
+    protected $table = 'currencies';
+	protected $fillable = array("name","rate");
+    protected $primaryKey = 'currency_id';
     public $timestamps = false;
 }

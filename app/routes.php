@@ -46,5 +46,15 @@ Route::get('/list-products',
     ['uses' => 'ProductsController@listProducts']
 );
 
+//Orders
+Route::get('/create-order',
+    ['uses' => 'OrdersController@createOrder']
+);
+
+//Orders
+Route::get('/get-currencies',
+    ['uses' => 'ServiceController@parseXML']
+);
+
 Route::post('/store/','ServiceController@store');
 
