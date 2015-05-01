@@ -47,7 +47,7 @@ Route::get('/list-products',
 );
 
 //Orders
-Route::get('/create-order',
+Route::get('/create-order/{id?}',
     ['uses' => 'OrdersController@createOrder']
 );
 
