@@ -14,7 +14,7 @@ nav{
 }
 
 .input-product{
-    width: 180px;
+    width: 196px;
     display: inline;
     overflow: hidden;
     border: 1px solid #3498DB;
@@ -26,12 +26,21 @@ span.main{
 }
 
 span.second{
-    width: 180px;
+    width: 196px;
     display: inline-block;
 }
 
-p.p-header{
+div.p-header{
+    margin: 10px 0 2px 0;
+    font-size: 18px;
+}
+
+div.product-row{
     margin-bottom: 5px;
+}
+
+p.action-buttons{
+    margin-top: 15px;
 }
 
 select {

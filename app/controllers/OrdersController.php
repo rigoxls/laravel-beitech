@@ -6,6 +6,9 @@ class OrdersController extends ServiceController {
 	{
         $products = DB::table('product')->orderBy('name','ASC')->get();
         $customers = Customer::orderBy('name','ASC')->get();
+        $currencies = Currencies::where('name', '=', 'USD')->get()->toArray();
+
+        $usdCurrency = array_shift($currencies);
 
         $selectedProducts = array();
         $customerProducts = array();
@@ -23,7 +26,7 @@ class OrdersController extends ServiceController {
         }
 
         return View::make('orders.create-order',
-            compact('customers', 'customerProducts'))
+            compact('customers', 'customerProducts', 'usdCurrency'))
         ->with('customerId', $customerId);
 	}
 }
