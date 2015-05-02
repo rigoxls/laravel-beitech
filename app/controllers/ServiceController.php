@@ -30,6 +30,94 @@ class ServiceController extends Controller {
         }
     }
 
+    public function restService($start_date = null, $end_date = null)
+    {
+        if($start_date && $end_date){
+
+            $data_res = DB::table('order AS ord')
+                ->join('order_detail AS ord_d', function($join){
+                    $join->on('ord_d.order_id', '=', 'ord.order_id');
+                })
+                ->join('customer AS cus', function($join){
+                    $join->on('cus.customer_id', '=', 'ord.customer_id');
+                })
+                ->join('product AS pro', function($join){
+                    $join->on('ord_d.product_id', '=', 'pro.product_id');
+                })
+              ->select(
+                    'ord.order_id',
+                    'ord.customer_id',
+                    'cus.name',
+                    'cus.email',
+                    'ord.delivery_address',
+                    'ord.usd_total',
+                    'ord.rate',
+                    'ord.created_at',
+                    'ord_d.product_id',
+                    'ord_d.quantity',
+                    'ord_d.price',
+                    'ord_d.currency_id',
+                    'ord.created_at',
+                    'pro.name AS prod_name'
+                )
+                ->whereBetween('ord.created_at', array('2015-05-02','2015-05-03'))
+                ->get();
+
+                $array_data = array();
+
+                foreach ($data_res as $key => $res) {
+                    if(!isset($array_data[$res->order_id])){
+
+                        $array_data[$res->order_id] = array(
+                            'order_id' => $res->order_id,
+                            'customer_id' => $res->customer_id,
+                            'name' => $res->name,
+                            'email' => $res->email,
+                            'delivery_address' => $res->delivery_address,
+                            'usd_total' => $res->usd_total,
+                            'usd_rate' => $res->rate,
+                            'created_at' => $res->created_at,
+                            'bought_products' => array(
+                                '0' => array(
+                                    'product_id' => $res->product_id,
+                                    'product' => $res->prod_name,
+                                    'quantity' => $res->quantity,
+                                    'currency_id' => $res->currency_id,
+                                    'price' => $res->price
+                                )
+                            )
+                        );
+                    }else{
+                        array_push(
+                            $array_data[$res->order_id]['bought_products'],
+                            array(
+                                    'product_id' => $res->product_id,
+                                    'product' => $res->prod_name,
+                                    'quantity' => $res->quantity,
+                                    'currency_id' => $res->currency_id,
+                                    'price' => $res->price
+                                )
+                        );
+                    }
+                }//end foreach
+
+            $this->restResponse(200, "orders found", $array_data);
+        }else{
+            $this->restResponse(400, "error on request", NULL);
+        }
+    }
+
+    public function restResponse($status, $status_message, $data)
+    {
+        header('Content-Type: application/json');
+        //header("HTTP/1.1 $status $status_message");
+        $response["status"] = $status;
+        $response["status_message"] = $status_message;
+        $response["response"] = $data;
+
+        $json_response = json_encode($response);
+        echo $json_response;
+    }
 
     public function messages($message = null, $type = null)
     {

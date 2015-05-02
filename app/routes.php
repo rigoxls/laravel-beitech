@@ -56,5 +56,10 @@ Route::get('/get-currencies',
     ['uses' => 'ServiceController@parseXML']
 );
 
+//rest service
+Route::get('/rest-service/{date_start?}/{date_end?}/',
+    ['uses' => 'ServiceController@restService']
+);
+
 Route::post('/store/','ServiceController@store');
 
