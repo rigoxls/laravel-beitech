@@ -32,7 +32,11 @@ class ServiceController extends Controller {
 
     public function restService($start_date = null, $end_date = null)
     {
+
         if($start_date && $end_date){
+
+            $start_date = date('Y-m-d H:i:s', strtotime($start_date . ' - 1 day'));
+            $end_date = date('Y-m-d H:i:s', strtotime($end_date . ' + 1 day'));
 
             $data_res = DB::table('order AS ord')
                 ->join('order_detail AS ord_d', function($join){
@@ -60,7 +64,7 @@ class ServiceController extends Controller {
                     'ord.created_at',
                     'pro.name AS prod_name'
                 )
-                ->whereBetween('ord.created_at', array('2015-05-02','2015-05-03'))
+                ->whereBetween('ord.created_at', array($start_date, $end_date))
                 ->get();
 
                 $array_data = array();
