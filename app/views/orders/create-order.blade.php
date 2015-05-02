@@ -38,7 +38,7 @@
                                             <option value="{{$product->product_id}}" price="{{$product->price}}">{{$product->name}}</option>
                                         @endforeach
                                     </select>
-                                    <input type="number" class="form-control input-product price" required readonly="">
+                                    <input type="number" currency="{{$usdCurrency['currency_id']}}" class="form-control input-product price" required readonly="">
                                     <input type="number" class="form-control input-product input-price quantity" required>
                                     <input type="number" class="form-control input-product eur-price" required step="any" readonly="">
                                     <input type="number" class="form-control input-product usd-price" required step="any" readonly="">
@@ -53,10 +53,9 @@
 
                         <p class="pull-right action-buttons">
                             <input type="button" id="addRow" value="Add Product" class="btn btn-success">
-                            <input type="button" value="Save Product" class="btn btn-primary">
+                            <input id="saveOrder" type="button" value="Save Order" class="btn btn-primary">
                         </p>
-                        <input type="hidden" value="saveProduct" name="action">
-                    </form>
+                    </form><br><br><br>
                     @if(Session::has('message'))
                         <div class="alert alert-{{ Session::get('class') }}">{{ Session::get('message')}}</div>
                     @endif

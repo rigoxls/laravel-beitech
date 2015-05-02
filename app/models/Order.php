@@ -1,7 +1,8 @@
 <?php
 
-class Customer extends \Eloquent {
-    protected $table = 'customer';
-	protected $fillable = array("name","email");
+class Order extends \Eloquent {
+    protected $table = 'order';
+	protected $fillable = array("customer_id","delivery_address");
+    protected $primaryKey = 'order_id';
     public $timestamps = false;
 }

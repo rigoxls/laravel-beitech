@@ -10,6 +10,11 @@
         };
 
         this.initJqueryEvents = function(){
+
+            $("#saveOrder").click(function(){
+                self.saveOrder();
+            });
+
             $("#customerId").change(function(e){
                 win.location = win.location.origin +"/create-order/"+ $(this).val();
             });
@@ -57,6 +62,40 @@
                 $( "div.product-row:first" ).clone(true).appendTo( "div.container-rows" );
                 $( "div.product-row:last" ).find('input').val('');
             })
+        };
+
+        this.saveOrder = function(){
+            var ordersObject = [];
+
+            $('.product-row').each(function(i,el){
+                if($.isNumeric($(el).find('input.price').val())){
+                    var productInfo = {
+                        productId: $(el).find('select option:selected').val(),
+                        price: $(el).find('input.price').val(),
+                        currencyId: $(el).find('input.price').attr('currency'),
+                        quantity: $(el).find('input.quantity').val(),
+                    }
+                    ordersObject.push(productInfo);
+                }
+            });
+
+            var customerId = $("#customerId").val();
+
+            if(ordersObject.length && customerId > 0){
+                ordersObject.action = 'saveOrder';
+                $.ajax({
+                    method:'POST',
+                    url: '/store',
+                    data: {
+                        'action': 'saveOrder',
+                        'orderList': ordersObject,
+                        'customerId': customerId
+                    },
+                })
+                .done(function(msg){
+                    win.location.href = '/create-order/';
+                })
+            }
         };
 
         this.init();

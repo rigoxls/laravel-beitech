@@ -156,4 +156,30 @@ class ServiceController extends Controller {
         return Redirect::to('/list-products');
     }
 
+    public function saveOrderPost()
+    {
+        $orderList = Input::get('orderList');
+
+        $order = new Order;
+        $order->customer_id = Input::get('customerId');
+        $order->delivery_address = 'kr 58 west 85 north 9 palo alto';
+
+        if($order->save()){
+            if(sizeof($orderList)){
+                foreach ($orderList as $ol) {
+                    $orderDetails = new OrderDetail;
+                    $orderDetails->currency_id = $ol['currencyId'];
+                    $orderDetails->product_id = $ol['productId'];
+                    $orderDetails->order_id = $order->order_id;
+                    $orderDetails->quantity = $ol['quantity'];
+                    $orderDetails->price = $ol['price'];
+                    $orderDetails->save();
+                }
+            }
+
+            $this->messages('Order saved !','success');
+        }
+
+    }
+
 }
