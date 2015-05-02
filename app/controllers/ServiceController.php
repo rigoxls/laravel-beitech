@@ -164,7 +164,7 @@ class ServiceController extends Controller {
         $order->customer_id = Input::get('customerId');
         $order->usd_total = Input::get('totalUsd');
         $order->rate = Input::get('rate');
-        $order->delivery_address = '';
+        $order->delivery_address = Input::get('deliveryAddress');
 
         if($order->save()){
             if(sizeof($orderList)){

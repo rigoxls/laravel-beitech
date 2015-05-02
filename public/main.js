@@ -90,6 +90,7 @@
                         action: 'saveOrder',
                         totalUsd : $('input.total-usd').val(),
                         rate : $('select.select-product:first').attr('usd'),
+                        deliveryAddress : $('input.delivery-address').val(),
                         orderList: ordersObject,
                         customerId: customerId
                     },

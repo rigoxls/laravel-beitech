@@ -23,6 +23,12 @@
                               @endforeach
                               </select>
                         </div>
+
+                        <div class="p-header">
+                            <span class="main">Delivery address</span>
+                            <input type="text" class="form-control delivery-address" >
+                        </div>
+
                         <div class="p-header">
                             <span class="main">Product</span>
                             <span class="second">Unitary Price €</span>
