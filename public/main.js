@@ -87,9 +87,11 @@
                     method:'POST',
                     url: '/store',
                     data: {
-                        'action': 'saveOrder',
-                        'orderList': ordersObject,
-                        'customerId': customerId
+                        action: 'saveOrder',
+                        totalUsd : $('input.total-usd').val(),
+                        rate : $('select.select-product:first').attr('usd'),
+                        orderList: ordersObject,
+                        customerId: customerId
                     },
                 })
                 .done(function(msg){
