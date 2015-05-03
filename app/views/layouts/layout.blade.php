@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project Test, by Rigoberto Giraldo C</a>
+            <a class="navbar-brand" href="/">Project Test, by Rigoberto Giraldo C</a>
         </div>
 
          <div class="dropdown pull-right">
@@ -42,7 +42,7 @@
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="/create-order">Create Order</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/list-orders">List Orders</a></li>
+                <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="/list-orders">List Orders</a></li> -->
             </ul>
          </div>
 
@@ -51,7 +51,7 @@
             <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="/create-product">Create Product</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="/list-products">List Pŕoducts</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/list-products">List Products</a></li>
             </ul>
          </div>
 
